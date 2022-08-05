@@ -4,11 +4,28 @@ const totalCPUs = require("os").cpus().length;
 
 const passport = require('passport');
 
+const multer  = require('multer');
+const upload = multer({ dest: './public/uploads/' });
+let fs = require('fs');
+
+const productController = require("../controllers/productController");
+const notifications = require('../controllers/notifications');
+
+const loginChecker = require("../middlewares/loginChecker");
+const { loggerConsole } = require("../config/logger");
+
 router.get('/', (req, res) => {
-    res.render("home", {
-        pageTitle: "Proyecto"
+    res.redirect('/login');
+})
+
+router.get('/error', (req, res) => {
+    res.render("error", {
+        pageTitle: "Error",
+        signUp: true
     });
 })
+
+router.get('/products/:section?', loginChecker, productController.getProducts);
 
 router.route('/login')
     .get((req, res) => {
@@ -18,7 +35,7 @@ router.route('/login')
         });
     })
     .post(passport.authenticate('login', { failureRedirect: '/login/fail'}), (req, res)=>{
-        res.redirect('/dashboard');
+        res.redirect('/products');
     });
 
 router.route('/login/fail')
@@ -29,7 +46,7 @@ router.route('/login/fail')
             error: true
         });
     });
-
+  
 router.route('/signup')
     .get((req, res) => {
         res.render("signup", {
@@ -37,7 +54,14 @@ router.route('/signup')
             signUp: true
         });
     })
-    .post(passport.authenticate('register', { failureRedirect: '/signup/fail'}),(req, res)=>{
+    .post(upload.single('imagen'), passport.authenticate('register', { failureRedirect: '/signup/fail'}), (req, res)=>{
+        let name = req.file.mimetype
+        name = name.split('/');
+        name = req.file.filename+'.'+name[1];
+        fs.rename('./public/uploads/'+req.file.filename, './public/uploads/'+'/'+name, function(err) {
+            if ( err ) console.error(err);
+        });
+        notifications.registrationNotice(req.user);
         res.redirect('/dashboard');
     });
 
@@ -55,8 +79,12 @@ router.route('/dashboard')
         if(req.user){
             res.render("dashboard", {
                 pageTitle: "Dashboard",
-                userName: req.user.username,
+                userName: req.user.nombre,
                 userEmail: req.user.email,
+                userDir: req.user.direccion,
+                userAge: req.user.edad,
+                userPhone: req.user.telefono,
+                userImage: req.user.imagen,
                 loggedIn: true,
                 signUp: false
             });

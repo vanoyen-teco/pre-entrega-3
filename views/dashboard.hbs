@@ -1,0 +1,15 @@
+<div class="container-md">
+    <div class="h2 mb-3">Panel de usuario:</div>
+    <div class="h5">Bienvenido: {{userName}}</div>
+    <div class="h5">Tu E-mail: {{userEmail}}</div>
+    <div class="h5">Dirección: {{userDir}}</div>
+    <div class="h5">Edad: {{userAge}}</div>
+    <div class="h5">Telefono: {{userPhone}}</div>
+    <div>
+        <div class="h5">Avatar:</div>
+        <img src="/uploads/{{userImage}}" style="max-width: 100px;">
+    </div>
+    {{#if fail}}
+    <div class="alert bg-danger mt-3">Lo sentimos, no podemos registrar el usuario.</div>
+    {{/if}}
+</div>

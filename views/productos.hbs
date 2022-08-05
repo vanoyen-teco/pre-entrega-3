@@ -1,0 +1,19 @@
+<div id="productos">
+	<div class="d-flex flex-wrap align-items-stretch justify-content-start w-100" id="productsContainer">		
+        {{#if productos}}
+        {{#each productos}}
+        <div class="boxItem">
+            <div class="fixBoxItem itemProducto" data-id="{{this.id}}">
+                <img src="{{this.foto}}" alt="{{this.titulo}}" width="100%" />
+                <h3 class="typeo regular spacing-100">{{this.titulo}}</h3>
+                <p class="typeo semibold precio">$ {{this.precio}}</p>
+                <p class="typeo regular sku">Art: {{this.SKU}}</p>
+                <a href="/cart/add/{{this.id}}" class="btn btn-dark w-100">Agregar al Carrito</a>
+            </div>
+        </div>
+        {{/each}}
+        {{else}}
+        <div class="h5 text-center alert alert-secondary">No hay productos</div>
+        {{/if}}
+    </div>
+</div>

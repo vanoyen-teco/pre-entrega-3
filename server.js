@@ -17,6 +17,9 @@ const session =  require('express-session');
 const passport = require('passport');
 const { initializePassport } = require('./models/Passport');
 initializePassport();
+app.use(session(config.mongostoreConfig));
+app.use(passport.initialize());
+app.use(passport.session());
 
 /*View Engine*/
 const handlebars = require('express-handlebars');
@@ -32,26 +35,24 @@ app.set("views", "./views");
 app.set("view engine", "hbs");
 app.use(express.static(path.join(__dirname ,'public')));
 
+/*Settings*/
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 /*Middlewares*/
 const routeErrorHandler = require("./middlewares/routeErrorHandler");
 
 /*Routers*/
 const mainRouter = require("./routes/mainRouter");
+const cartRouter = require("./routes/cartRouter");
 app.use("/", mainRouter);
+app.use("/cart", cartRouter);
 app.use(routeErrorHandler);
-
-/*Settings*/
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 
 if(config.global.GZIP){
     const compression = require('compression');
     app.use(compression());
 }
-
-app.use(session(config.mongostoreConfig));
-app.use(passport.initialize());
-app.use(passport.session());
 
 if(config.global.MODE !== 'fork'){
     if (cluster.isMaster) {

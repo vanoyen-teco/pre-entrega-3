@@ -9,9 +9,21 @@ mongoose.connect(process.env.DB_CNX,{
 });
 
 const UserSchema = mongoose.Schema({
-    username: {
+    nombre: {
         type: String,
-        required: [true, 'name is required']
+        required: true,
+    },
+    direccion: {
+        type: String,
+        required: true,
+    },
+    edad: {
+        type: Number,
+        required: true,
+    },
+    telefono: {
+        type: String,
+        required: true,
     },
     email: {
         type: String,
@@ -21,6 +33,10 @@ const UserSchema = mongoose.Schema({
     password: {
         type: String,
         required: [true, 'password is required'],
+    },
+    imagen: {
+        type: String,
+        required: false,
     }
 });
 

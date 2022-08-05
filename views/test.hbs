@@ -1,0 +1,22 @@
+<div class="container-md">
+    <div class="col-md-8 offset-md-2">
+        <div class="h5 text-center">Sign Up</div>
+        <form autocomplete="off" action="/test" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+            
+            <div class="form-group mt-3">
+                <label>Foto:</label>
+                <input class="form-control" required type="file" name="imagen" accept=".jpg, .jpeg, .png"/>
+            </div>
+            <div class="form-group form-group mt-3">
+                <input class="btn btn-secondary" type="submit" value="Sign Up"/>
+            </div>
+            {{#if fail}}
+            <div class="alert bg-danger mt-1">Lo sentimos, no podemos registrar el usuario.</div>
+            {{/if}}
+        </form>                  
+    </div>          
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+<script>
+    
+</script>

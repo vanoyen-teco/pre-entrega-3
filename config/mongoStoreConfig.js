@@ -12,7 +12,7 @@ const config =
     secret: 'coder',
     resave: true,
     saveUninitialized: true,
-    cookie: {maxAge: 600000} //10 minutos
+    cookie: {maxAge: 600000}
 }
 
 module.exports = config;

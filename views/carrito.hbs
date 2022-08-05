@@ -1,0 +1,30 @@
+<div class="container-md">
+    {{#if productos}}
+    <div class="h4 mb-5 mt-3">Detalle de tu pedido:</div>
+    <div>
+        <div class="d-flex fw-bold pb-3">
+            <div class="col">Producto</div>
+            <div class="col-2">Cantidad</div>
+            <div class="col-2">Precio</div>
+            <div class="col-auto">Eliminar</div>
+        </div>
+        {{#each productos}}
+        <div class="d-flex">
+            <div class="col">{{this.titulo}}</div>
+            <div class="col-2">{{this.cantidad}}</div>
+            <div class="col-2">${{this.precio}}</div>
+            <div class="col-auto d-flex aling-items-center">
+                <a href="/cart/prod/remove/{{this.id}}"><i class="bx bx-trash-alt bx-sm ps-2"></i></a>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    <div class="d-flex mt-5">
+        <div class="offset-md-8 col-md-4">
+            <a href="/cart/process" class="btn btn-dark w-100">Finalizar la compra</a>
+        </div>
+    </div>    
+    {{else}}
+    <div class="h5 text-center alert alert-secondary">No hay items en tu carrito</div>
+    {{/if}}
+</div>
