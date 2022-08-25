@@ -92,3 +92,14 @@
 [2022-08-04T19:59:23.915] [WARN] warnings - /cart/add/cart/prod/remove/1071 GET
 [2022-08-04T19:59:36.755] [WARN] warnings - /cart/add/cart/prod/remove/1071 GET
 [2022-08-04T21:54:44.194] [WARN] warnings - /cart/process GET
+[2022-08-10T13:31:51.801] [WARN] warnings - /user/62f1516240d41a GET
+[2022-08-22T19:20:49.275] [WARN] warnings - /api/productos GET
+[2022-08-22T19:21:07.974] [WARN] warnings - /productos GET
+[2022-08-22T19:44:43.250] [WARN] warnings - /ladmin GET
+[2022-08-22T19:49:32.647] [WARN] warnings - /loginss GET
+[2022-08-22T19:49:59.403] [WARN] warnings - /loginss GET
+[2022-08-22T19:52:16.766] [WARN] warnings - /loginss GET
+[2022-08-22T19:52:49.872] [WARN] warnings - /loginss GET
+[2022-08-22T19:54:29.081] [WARN] warnings - /uploads/ GET
+[2022-08-22T20:04:56.253] [WARN] warnings - /uploads/ GET
+[2022-08-22T20:38:24.695] [WARN] warnings - /uploads/ GET

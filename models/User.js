@@ -37,6 +37,11 @@ const UserSchema = mongoose.Schema({
     imagen: {
         type: String,
         required: false,
+    },
+    nivel: {
+        type: String,
+        required: false,
+        default: 'user',
     }
 });
 

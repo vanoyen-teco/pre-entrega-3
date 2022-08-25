@@ -81,6 +81,25 @@ const addProductToCart = async (cartId, prodId) => {
     }
 }
 
+const decreaseOneProduct = async (cartId, prodId) => {
+    const cart = await getCartById(cartId);
+    const productIndex =
+        cart.productos.findIndex(
+            (product) => product.id === prodId
+        );
+    if (productIndex === -1) {
+        return false;
+    }else{
+        cart.productos[productIndex].cant -= 1;
+        if(cart.productos[productIndex].cant < 1){
+            return deleteOneProduct(cartId, prodId);
+        }else{
+            db.update(cartId, cart.productos);
+            return true;
+        }
+    }
+}
+
 module.exports = { 
     getAllCarts,
     createNewCart,
@@ -90,4 +109,5 @@ module.exports = {
     deleteOneProduct,
     isCart,
     addProductToCart,
+    decreaseOneProduct,
 };

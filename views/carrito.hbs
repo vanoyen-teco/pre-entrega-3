@@ -14,7 +14,13 @@
             <div class="col-2">{{this.cantidad}}</div>
             <div class="col-2">${{this.precio}}</div>
             <div class="col-auto d-flex aling-items-center">
-                <a href="/cart/prod/remove/{{this.id}}"><i class="bx bx-trash-alt bx-sm ps-2"></i></a>
+                <a href="/cart/prod/decrease/{{this.id}}"><i class="bx bx-message-square-minus bx-sm ps-2"></i></a>
+            </div>
+            <div class="col-auto d-flex aling-items-center">
+                <a href="/cart/add/{{this.id}}"><i class="bx bx-message-square-add bx-sm ps-2"></i></a>
+            </div>
+            <div class="col-auto d-flex aling-items-center">
+                <a href="/cart/prod/remove/{{this.id}}"><i class="bx bx-message-square-x bx-sm ps-2"></i></a>
             </div>
         </div>
         {{/each}}

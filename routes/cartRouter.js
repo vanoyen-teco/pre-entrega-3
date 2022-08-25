@@ -11,6 +11,8 @@ router.get('/', cartController.printCart);
 
 router.get('/add/:id', cartHandler, cartController.addProductToCart);
 
+router.get('/prod/decrease/:id', cartHandler, cartController.decreaseOneProduct);
+
 router.get('/prod/remove/:id', cartHandler, cartController.deleteProductFromCart);
 
 router.get('/process', cartController.processCart);

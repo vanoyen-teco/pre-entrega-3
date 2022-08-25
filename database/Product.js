@@ -2,7 +2,8 @@ require('dotenv/config');
 let dataBaseType = process.env.DB || 'MongoDb';
 // Verifico contenido de variable de entorno DB
 
-dataBaseType = (dataBaseType == 'MongoDb' || dataBaseType == 'Firebase')?dataBaseType:'MongoDb';
+// dataBaseType = (dataBaseType == 'MongoDb' || dataBaseType == 'Firebase')?dataBaseType:'MongoDb';
+// Opcionalmente se podría agregar dao Para Firebase.
 
 dataBaseType = 'Fetch';
 const db = require(`./daos/product${dataBaseType}`);

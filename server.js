@@ -10,7 +10,6 @@ const server = require('http').Server(app);
 
 /*Performance*/
 const cluster = require("cluster");
-const totalCPUs = require("os").cpus().length;
 
 /*Session*/
 const session =  require('express-session');
@@ -39,14 +38,16 @@ app.use(express.static(path.join(__dirname ,'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-/*Middlewares*/
+/*Middlewar general*/
 const routeErrorHandler = require("./middlewares/routeErrorHandler");
 
 /*Routers*/
 const mainRouter = require("./routes/mainRouter");
 const cartRouter = require("./routes/cartRouter");
+const adminRouter = require("./routes/adminRouter");
 app.use("/", mainRouter);
 app.use("/cart", cartRouter);
+app.use("/admin", adminRouter);
 app.use(routeErrorHandler);
 
 if(config.global.GZIP){
@@ -56,7 +57,7 @@ if(config.global.GZIP){
 
 if(config.global.MODE !== 'fork'){
     if (cluster.isMaster) {
-        for (let i = 0; i < totalCPUs; i++) {
+        for (let i = 0; i < config.maxCPUs; i++) {
             try {
                 cluster.fork();
             } catch (error) {

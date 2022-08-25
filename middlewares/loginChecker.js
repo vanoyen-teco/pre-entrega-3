@@ -8,4 +8,16 @@ function loginChecker(req, res, next){
     }
 }
 
-module.exports = loginChecker;
+function adminChecker(req, res, next){
+    if(req.user && req.user.nivel == 'admin'){
+        next();
+    }else{
+        res.redirect('/login');
+    }
+}
+
+
+module.exports = {
+    loginChecker,
+    adminChecker,
+};

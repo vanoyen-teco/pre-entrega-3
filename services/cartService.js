@@ -52,12 +52,21 @@ const addProductToCart = (cartId, prodId) => {
     } 
 }
 
+const decreaseOneProduct = (cartId, prodId) => {
+    try {
+        return Cart.decreaseOneProduct(cartId, prodId);
+    } catch (error) {
+        return false;
+    } 
+}
+
 module.exports = {
     createNewCart,
     insertNewProduct,
     getCartById,
     deleteOneCart,
     deleteProductFromCart,
+    decreaseOneProduct,
     isCart,
     addProductToCart,
 };

@@ -63,6 +63,14 @@ const addProductToCart = (req, res) => {
     });
 };
 
+const decreaseOneProduct = (req, res) => {
+    const {email} = req.user;
+    cartService.decreaseOneProduct(email, req.params.id)
+    .then(() => {
+        res.redirect('/cart');
+    });
+};
+
 const printCart = (req, res) => {
     let productos = false;
     if(!req.user){
@@ -141,6 +149,7 @@ module.exports = {
     deleteProductFromCart,
     isCart,
     addProductToCart,
+    decreaseOneProduct,
     printCart,
     processCart,
     successCart,
