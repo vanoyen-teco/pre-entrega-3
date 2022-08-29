@@ -1,0 +1,17 @@
+<div class="container-md">
+    <div class="h4">Centro de consultas: </div>
+    <div class="border-top border-secondary pb-3" id="chatBox">
+        <div id="chatContainer" class="pt-4"></div>
+        <form id="formMsg" class="needs-validation pt-5" novalidate>
+            <div class="col-auto">
+                <input type="text" class="form-control" id="inp_msj" value="" autocomplete="off" placeholder="Ingresá tu mensaje..." required>
+            </div>
+            <div class="col-auto mt-2">
+                <button type="submit" class="btn btn-secondary">Enviar</button>                
+            </div>
+        </form>
+    </div>    
+</div>
+{{#each scripts}}
+    <script src="{{script}}"></script>
+{{/each}}

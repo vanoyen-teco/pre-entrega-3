@@ -17,6 +17,8 @@ const ProductModelSchema = new Schema({
     foto: String,
     precio: { type: Number },
     stock: { type: Number },
+    categoria: String,
+    foto: String,
     id: String
 });
 const ProductModel = mongoose.model('producto', ProductModelSchema );

@@ -1,5 +1,6 @@
 const notifications = require('./notifications');
 const logger = require("../config/logger");
+const images = require("../models/images");
 let fs = require('fs');
 const totalCPUs = require("os").cpus().length;
 
@@ -46,7 +47,12 @@ const signupFile = (req, res) => {
     name = name.split('/');
     name = req.file.filename+'.'+name[1];
     fs.rename('./public/uploads/'+req.file.filename, './public/uploads/'+'/'+name, function(err) {
-        if ( err ) logger.loggerError.log(err);
+        if(err){
+            logger.loggerError.log(err);
+        }else{
+            images.resizeImage('./public/uploads/',name,400,400);
+        }
+        
     });
     notifications.registrationNotice(req.user);
     res.redirect('/dashboard');

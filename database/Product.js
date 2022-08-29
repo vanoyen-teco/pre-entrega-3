@@ -5,7 +5,7 @@ let dataBaseType = process.env.DB || 'MongoDb';
 // dataBaseType = (dataBaseType == 'MongoDb' || dataBaseType == 'Firebase')?dataBaseType:'MongoDb';
 // Opcionalmente se podría agregar dao Para Firebase.
 
-dataBaseType = 'Fetch';
+dataBaseType = 'Fetch'; // Para facilitar la corrección del proyecto mediante un front con una base completa.
 const db = require(`./daos/product${dataBaseType}`);
 
 

@@ -127,6 +127,7 @@ const deleteOneProduct = (req, res) => {
 
 module.exports = {
     getProducts,
+    getProductById,
     createNewProduct,
     updateOneProduct,
     deleteOneProduct,

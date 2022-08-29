@@ -8,6 +8,9 @@ const path = require('path');
 const app = express();
 const server = require('http').Server(app);
 
+const { Server } = require("socket.io");
+const io = new Server(server);
+
 /*Performance*/
 const cluster = require("cluster");
 
@@ -40,14 +43,20 @@ app.use(express.json());
 
 /*Middlewar general*/
 const routeErrorHandler = require("./middlewares/routeErrorHandler");
+const chatMiddleware = require("./middlewares/chatMiddleware");
 
 /*Routers*/
 const mainRouter = require("./routes/mainRouter");
 const cartRouter = require("./routes/cartRouter");
 const adminRouter = require("./routes/adminRouter");
+const supportRouter = require("./routes/chatRouter");
+const productRouter = require("./routes/productRouter");
+
 app.use("/", mainRouter);
+app.use("/support", chatMiddleware(io), supportRouter);
 app.use("/cart", cartRouter);
 app.use("/admin", adminRouter);
+app.use("/api", productRouter);
 app.use(routeErrorHandler);
 
 if(config.global.GZIP){
