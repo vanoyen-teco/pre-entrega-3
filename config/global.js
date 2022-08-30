@@ -9,7 +9,8 @@ let mongostoreConfig = require('./mongoStoreConfig');
 const mainPath = 'https://vanoyen.com.ar/';
 const imgPath = 'api/fotos/';
 
-const PORT = (argv.port !== undefined)?argv.port:8080;
+//const PORT = (argv.port !== undefined)?argv.port:8080;
+const PORT = process.env.PORT;
 const MODE = argv.mode || 'fork';
 const GZIP = argv.gzip || false;
 

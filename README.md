@@ -45,7 +45,7 @@ La prueba se encuentra en la carpeta `/postman` con el nombre `Chatbot.postman_c
 
 Se realizó el Deploy en un servidor `heroku`
 
-Podrá visualizar el sitio [aquí](https://)
+Podrá visualizar el sitio [aquí](https://vanoyen-ecommerce.herokuapp.com/)
 
 ### Base de datos
 
