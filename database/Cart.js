@@ -66,10 +66,15 @@ const deleteOneProduct = async (cartId, prodId) => {
 
 const addProductToCart = async (cartId, prodId) => {
     const cart = await getCartById(cartId);
-    const productIndex =
+    let productIndex;
+    if(!cart){
+        productIndex = -1;
+    }else{
+        productIndex =
         cart.productos.findIndex(
             (product) => product.id === prodId
         );
+    }    
     if (productIndex === -1) {
         cart.productos.push({id: prodId, cant: 1});
         db.update(cartId, cart.productos);
