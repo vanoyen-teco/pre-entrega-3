@@ -38,7 +38,7 @@ async function isCart(email){
 }
 
 async function add(newCart){
-    CartModel.create({ timestamp: newCart.timestamp, email: newCart.email }, function (err, cart) {
+    CartModel.create({ timestamp: newCart.timestamp, email: newCart.email, productos: newCart.productos }, function (err, cart) {
         if (err) console.log(err);
     })
 

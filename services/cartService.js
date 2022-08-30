@@ -4,6 +4,7 @@ const createNewCart = (userEmail) => {
     const CartToInsert = {
         timestamp: new Date().getTime(),
         email: userEmail,
+        productos: [],
     };
     try {
         const createdCart = Cart.createNewCart(CartToInsert);
@@ -44,9 +45,9 @@ const deleteProductFromCart = (cartId, prodId) => {
     }
 };
 
-const addProductToCart = (cartId, prodId) => {
-    try {
-        return Cart.addProductToCart(cartId, prodId);
+const addProductToCart = async (cartId, prodId) => {
+    try {      
+        return await Cart.addProductToCart(cartId, prodId); 
     } catch (error) {
         return false;
     } 

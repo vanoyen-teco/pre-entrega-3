@@ -3,16 +3,14 @@ const router = express.Router();
 
 const cartController = require("../controllers/cartController");
 
-/*Middleware Cart*/
-const cartHandler = require("../middlewares/cartHandler");
 
 router.get('/', cartController.printCart);
 
-router.get('/add/:id', cartHandler, cartController.addProductToCart);
+router.get('/add/:id', cartController.addProductToCart);
 
-router.get('/prod/decrease/:id', cartHandler, cartController.decreaseOneProduct);
+router.get('/prod/decrease/:id', cartController.decreaseOneProduct);
 
-router.get('/prod/remove/:id', cartHandler, cartController.deleteProductFromCart);
+router.get('/prod/remove/:id', cartController.deleteProductFromCart);
 
 router.post('/process', cartController.processCart);
 

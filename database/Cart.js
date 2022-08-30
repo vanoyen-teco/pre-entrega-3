@@ -65,16 +65,20 @@ const deleteOneProduct = async (cartId, prodId) => {
 };
 
 const addProductToCart = async (cartId, prodId) => {
-    const cart = await getCartById(cartId);
-    let productIndex;
+    let cart = await getCartById(cartId);
     if(!cart){
-        productIndex = -1;
-    }else{
-        productIndex =
-        cart.productos.findIndex(
-            (product) => product.id === prodId
-        );
-    }    
+        const CartToInsert = {
+            timestamp: new Date().getTime(),
+            email: cartId,
+            productos: [{id: prodId, cant: 1}]
+        };
+        cart = await createNewCart(CartToInsert);
+        return true;
+    }
+    productIndex =
+    cart.productos.findIndex(
+        (product) => product.id === prodId
+    );  
     if (productIndex === -1) {
         cart.productos.push({id: prodId, cant: 1});
         db.update(cartId, cart.productos);
