@@ -28,18 +28,10 @@ async function get(user){
 }
 
 async function add(newMessage){
-    let id;
     ChatModel.create({ email: newMessage.email, email: newMessage.email, author: newMessage.author, message: newMessage.message  }, function (err, chat) {
         if (err) return false;
-        id = chat._id;
     })
-
-    const doc = await ChatModel.findOne({ id });
-    let updateChat = {...newMessage};
-    updateChat.id = id;
-    doc.overwrite(updateChat);
-    const data = await doc.save();
-    return data;
+    return true;
 }
 
 module.exports = {
