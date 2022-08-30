@@ -25,12 +25,21 @@
         </div>
         {{/each}}
     </div>
-    <div class="d-flex mt-5">
-        <div class="offset-md-8 col-md-4">
-            <a href="/cart/process" class="btn btn-dark w-100">Finalizar la compra</a>
+    <form action="/cart/process" method="POST" class="needs-validation" novalidate>
+        <div class="d-flex mt-5 flex-column">
+            <div class="offset-md-8 col-md-4 mb-3">
+                <label for="inputDireccion" class="form-label">Ingresa tu dirección:</label>
+                <input type="text" class="form-control" id="inputDireccion" name="direccion" autocomplete="off" required>
+            </div>
+            <div class="offset-md-8 col-md-4">
+                <button type="submit" class="btn btn-dark w-100">Finalizar la compra</button>
+            </div>
         </div>
-    </div>    
+    </form>    
     {{else}}
     <div class="h5 text-center alert alert-secondary">No hay items en tu carrito</div>
     {{/if}}
 </div>
+{{#each scripts}}
+    <script src="{{script}}"></script>
+{{/each}}

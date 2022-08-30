@@ -1,4 +1,5 @@
 const cartService = require("../services/cartService");
+const orderService = require("../services/orderService");
 const productService = require("../services/productService");
 const notifications = require('../controllers/notifications');
 
@@ -95,18 +96,34 @@ const printCart = (req, res) => {
                         pageTitle: "Carrito",
                         productos: productos,
                         loggedIn: true,
-                        signUp: false
+                        signUp: false,
+                        scripts : [{ script: './js/cart.js'}]
                     });
                 })
-            };
+            }else{
+                res.render("carrito", {
+                    pageTitle: "Carrito",
+                    productos: [],
+                    loggedIn: true,
+                    signUp: false,
+                    scripts : [{ script: './js/cart.js'}]
+                });
+            }
         });
     }    
 }
 
+
 const processCart = (req, res) => {
+    const { body } = req;
     if(!req.user){
         res.redirect('/login');
     }else{
+        if (
+            !body.direccion 
+        ){
+            res.redirect('/cart');
+        }
         let cart = isCart(req.user.email);  
         cart.then((cartRes) => {
             if(cartRes.productos){
@@ -119,13 +136,21 @@ const processCart = (req, res) => {
                         productos = result;
                         productos.forEach(item => {
                             let prod = cartRes.productos.find((product) => product.id == item.id);
+                            item.precio = item.precio;
+                            item.titulo = item.titulo;
+                            item.SKU = item.SKU;
                             item.cantidad = prod.cant;
                             item.subto = prod.cant * item.precio;
                         });
                     }
+                    // Crea la orden
+                    orderService.createNewOrder(req.user.email, productos, body.direccion);
+                    // Notificaciones generales
                     notifications.sendCart(req.user, productos);
                     notifications.sendSMS(req.user);
                     notifications.sendCartAlert(req.user);
+                    // Elimino el carrito procesado y pasado a orden.
+                    cartService.deleteOneCart(cartRes._id);
                     res.redirect('/cart/success');
                 })
             };

@@ -55,7 +55,7 @@ async function update(cartId, changes){
 }
 
 async function remove(cartId){
-    const res = await CartModel.deleteOne({ id: cartId });
+    const res = await CartModel.deleteOne({ _id: cartId });
     return res;
 }
 

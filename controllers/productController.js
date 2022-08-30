@@ -16,7 +16,7 @@ const getAllProducts = (req, res) => {
             signUp: false,
             isCart: false
         });
-    })
+    });
     
 };
 
